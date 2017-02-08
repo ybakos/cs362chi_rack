@@ -16,4 +16,4 @@ class AlbumsApp
 
 end
 
-Rack::Handler::WEBrick.run AlbumsApp.new
+#Rack::Handler::WEBrick.run AlbumsApp.new
