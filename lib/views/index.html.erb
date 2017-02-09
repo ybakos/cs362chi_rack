@@ -3,7 +3,14 @@
     <title>Top 100 Best Albums of All Time</title>
   </head>
   <body>
-  	<h1>Top 100 Best Albums of All Time</h1>
+  	<h1>Top 100 Best Albums of All Time</h1><br>
+    <select onchange="location = this.value;">
+    <option>Sort By</option>
+   <option value="/orderAlphabetically">Sort Alphabetically</option>
+   <option value="/orderByAlbumNameLength">Sort By Album Title Length</option>
+   <option value="/orderByRank">Sort By Rank</option>
+   <option value="/orderByYear">Sort By Year</option>
+</select>
   <table>
   <tr>
   	<th>Rank</th>
