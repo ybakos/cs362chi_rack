@@ -3,6 +3,20 @@
     <title>Top 100 Best Albums of All Time</title>
   </head>
   <body>
-   <h1><%=  puts rankedAlbums.inspect %></h1>
+  	<h1>Top 100 Best Albums of All Time</h1>
+  <table>
+  <tr>
+  	<th>Rank</th>
+  	<th>Album Title</th>
+  	<th>Year</th>
+  </tr>
+      <% @rankedAlbums.each do |album| %>
+  <tr>
+   	<td><%= "#{album.rank}" %></td>
+   	<td><%= "#{album.albumName}" %></td>
+    <td><%= "#{album.year}" %></td>
+   	<% end %>
+   </tr>
+   </table>
   </body>
 </html>

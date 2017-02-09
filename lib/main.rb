@@ -14,30 +14,29 @@ end
 
 class AlbumRank
 
-	def initialize
-    @rankArray = Array.new
-  end
+	# def initialize
+ #    @rankArray = Array.new
+ #  end
 
 
-  def build_array(array)
-    array.map.with_index do |d, i|
+  def self.build_array(array)
+
+    rankArray = []
+
+    rankArray = array.map.with_index do |d, i|
       albumName, year = d.split(",")
       year = year.to_i
-      @rankArray << Album.new(i+1, albumName, year)
+      Album.new(i+1, albumName, year)
     end 
+    return rankArray
   end
 
 
   def print_data
-    @rankArray.each do |item|
+    rankArray.each do |item|
     	puts item.inspect
     end
   end
-
-  def get_binding
-    binding()
-  end
-
 end
 
 
@@ -55,10 +54,9 @@ class AlbumRankApp
     # This is our font controller!
     case request.path
     when "/" then 
-      rankedAlbums = AlbumRank.new
-      rankedAlbums.build_array(albums)
+      @rankedAlbums = AlbumRank.build_array(albums)
 
-      Rack::Response.new(render("index.html.erb", rankedAlbums))
+      Rack::Response.new(render("index.html.erb", @rankedAlbums))
     #when "/orderByAlbumNameLength" then
     #when "/orderByYear" then
     #when "/orderByAlphabetical" then
@@ -69,6 +67,6 @@ class AlbumRankApp
   def render(template, data)
     path = File.expand_path("../views/#{template}", __FILE__)
     output = ERB.new(File.read(path))
-    output.result(data.get_binding)
+    output.result(binding)
   end
 end
