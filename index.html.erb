@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Top 100 Albums of All Time</title>
+	</head>
+	<body>
+		<h1>Top 100 Albums of All Time</h1>
+		<table>
+			<tr>
+				<th>Rank</th>
+				<th>Album Title</th>
+				<th>Year</th>
+			</tr>
+			<tr>
+				<% albums.each do |album| %>
+				<td><%= album.rank %></td>
+				<td><%= album.title %></td>
+				<td><%= album.year %></td>
+			</tr>
+		</table>
+	</body>
+</html>
