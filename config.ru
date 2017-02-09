@@ -1,4 +1,4 @@
-require 'main'
+require_relative 'lib/main'
 
 use Rack::Reloader, 0
 
