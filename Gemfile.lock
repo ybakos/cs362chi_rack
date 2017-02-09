@@ -5,10 +5,9 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   rack
 
 BUNDLED WITH
-   1.14.3
+   1.13.7
