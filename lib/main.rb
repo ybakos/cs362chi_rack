@@ -1,12 +1,6 @@
 require "rack"
 require "erb"
 
-albums = []
-
-File.open("top_100_albums.txt", "r") do |file|
-  albums = file.readlines
-end
-
 class Album
   attr_accessor :rank, :albumName, :year
 
@@ -25,7 +19,7 @@ class AlbumRank
   end
 
 
-  def buildArray(array)
+  def build_array(array)
     array.map.with_index do |d, i|
       albumName, year = d.split(",")
       year = year.to_i
@@ -34,21 +28,36 @@ class AlbumRank
   end
 
 
-  def printData
+  def print_data
     @rankArray.each do |item|
     	puts item.inspect
     end
+  end
+
+  def get_binding
+    binding
   end
 
 end
 
 
 class AlbumRankApp
+
   def call(env)
     request = Rack::Request.new(env)
 
+    albums = []
+
+    File.open("top_100_albums.txt", "r") do |file|
+      albums = file.readlines
+    end
+
     case request.path
-    when "/" then Rack::Response.new(render("index.html.erb"))
+    when "/" then 
+      rankedAlbums = AlbumRank.new
+      rankedAlbums.build_array(albums)
+
+      Rack::Response.new(render("index.html.erb"), rankedAlbums)
     #when "/orderByAlbumNameLength" then
     #when "/orderByYear" then
     #when "/orderByAlphabetical" then
@@ -56,14 +65,9 @@ class AlbumRankApp
     end
   end
 
-  def render(template)
+  def render(template, data)
     path = File.expand_path("../views/#{template}", __FILE__)
-    ERB.new(File.read(path)).result(binding)
+    output = ERB.new(File.read(path))
+    output.result(data.get_binding)
   end
 end
-
-
-
-test = AlbumRank.new
-test.buildArray(albums)
-#test.printData
