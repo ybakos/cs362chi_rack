@@ -52,12 +52,13 @@ class AlbumRankApp
       albums = file.readlines
     end
 
+    # This is our font controller!
     case request.path
     when "/" then 
       rankedAlbums = AlbumRank.new
       rankedAlbums.build_array(albums)
 
-      Rack::Response.new(render("index.html.erb"), rankedAlbums)
+      Rack::Response.new(render("index.html.erb", rankedAlbums))
     #when "/orderByAlbumNameLength" then
     #when "/orderByYear" then
     #when "/orderByAlphabetical" then
