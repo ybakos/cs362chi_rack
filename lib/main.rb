@@ -1,4 +1,5 @@
 require "rack"
+require "erb"
 
 albums = []
 
@@ -41,6 +42,28 @@ class AlbumRank
 
 end
 
+
+class AlbumRankApp
+  def call(env)
+    request = Rack::Request.new(env)
+
+    case request.path
+    when "/" then Rack::Response.new(render("index.html.erb"))
+    #when "/orderByAlbumNameLength" then
+    #when "/orderByYear" then
+    #when "/orderByAlphabetical" then
+    else Rack::Response.new("404 Not Found", 404)
+    end
+  end
+
+  def render(template)
+    path = File.expand_path("../views/#{template}", __FILE__)
+    ERB.new(File.read(path)).result(binding)
+  end
+end
+
+
+
 test = AlbumRank.new
 test.buildArray(albums)
-test.printData
+#test.printData
