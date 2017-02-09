@@ -35,7 +35,7 @@ class AlbumRank
   end
 
   def get_binding
-    binding
+    binding()
   end
 
 end
