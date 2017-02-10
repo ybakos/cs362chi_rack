@@ -14,11 +14,6 @@ end
 
 class AlbumRank
 
-	# def initialize
- #    @rankArray = Array.new
- #  end
-
-
   def self.build_array(array)
 
     rankArray = []
@@ -51,15 +46,24 @@ class AlbumRankApp
       albums = file.readlines
     end
 
-    # This is our font controller!
+    @rankedAlbums = AlbumRank.build_array(albums)
+    # This is our front controller!
     case request.path
     when "/" then 
-      @rankedAlbums = AlbumRank.build_array(albums)
-
       Rack::Response.new(render("index.html.erb", @rankedAlbums))
-    #when "/orderByAlbumNameLength" then
-    #when "/orderByYear" then
-    #when "/orderByAlphabetical" then
+
+    when "/orderByAlbumNameLength" then
+      @rankedAlbums.sort! { |a,b| a.albumName.length <=> b.albumName.length }
+      Rack::Response.new(render("index.html.erb", @rankedAlbums))
+
+    when "/orderByYear" then
+      @rankedAlbums.sort! { |a,b| a.year <=> b.year }
+      Rack::Response.new(render("index.html.erb", @rankedAlbums))
+
+    when "/orderAlphabetically" then
+      @rankedAlbums.sort! { |a,b| a.albumName <=> b.albumName }
+      Rack::Response.new(render("index.html.erb", @rankedAlbums))
+
     else Rack::Response.new("404 Not Found", 404)
     end
   end
