@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 
-require './main.rb'
+require './lib/main.rb'
 require 'rack/test'
 require 'test/unit'
  
