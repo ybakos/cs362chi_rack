@@ -6,10 +6,6 @@
        background-color: lightgrey;
       }
 
-      html, body {
-          height: 99%;
-      }
-
       html {
           display: table;
           margin: auto;
@@ -31,25 +27,28 @@
   </head>
   <body>
   	<h1>Top 100 Best Albums of All Time</h1><br>
+
     <select onchange="location = this.value;">
-    <option>Sort By</option>
-   <option value="/orderAlphabetically">Sort Alphabetically</option>
-   <option value="/orderByAlbumNameLength">Sort By Album Title Length</option>
-   <option value="/">Sort By Rank</option>
-   <option value="/orderByYear">Sort By Year</option>
-</select><!-- reckless indentation? -->
-  <table>
-  <tr> <!-- indentation? -->
-  	<th>Rank</th>
-  	<th>Album Title</th>
-  	<th>Year</th>
-  </tr>
-      <% @rankedAlbums.each do |album| %> <!-- reckless indentation? -->
-  <tr><!-- reckless indentation? -->
-   	<td><%= album.rank %></td> 
-    <td><%= album.year %></td>
-   	<% end %>
-   </tr>
-   </table>
+      <option>Sort By</option>
+      <option value="/orderAlphabetically">Sort Alphabetically</option>
+      <option value="/orderByAlbumNameLength">Sort By Album Title Length</option>
+      <option value="/">Sort By Rank</option>
+      <option value="/orderByYear">Sort By Year</option>
+    </select>
+
+    <table>
+      <tr>
+      	<th>Rank</th>
+      	<th>Album Title</th>
+      	<th>Year</th>
+      </tr>       
+      <% @rankedAlbums.each do |album| %>
+        <tr>
+          <td><%= album.rank %></td>
+          <td><%= album.name %></td> 
+          <td><%= album.year %></td>
+        </tr>
+      <% end %>
+    </table>
   </body>
 </html>
