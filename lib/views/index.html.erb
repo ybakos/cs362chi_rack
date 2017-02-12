@@ -47,7 +47,7 @@
       <% @rankedAlbums.each do |album| %> <!-- reckless indentation? -->
   <tr><!-- reckless indentation? -->
    	<td><%= "#{album.rank}" %></td> <!-- interpolating a string with a whole string is redundant. -->
-   	<td><%= "#{album.albumName}" %></td>
+   	<td><%= "#{album.name}" %></td>
     <td><%= "#{album.year}" %></td>
    	<% end %>
    </tr>
