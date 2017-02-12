@@ -37,16 +37,16 @@
    <option value="/orderByAlbumNameLength">Sort By Album Title Length</option>
    <option value="/">Sort By Rank</option>
    <option value="/orderByYear">Sort By Year</option>
-</select>
+</select><!-- reckless indentation? -->
   <table>
-  <tr>
+  <tr> <!-- indentation? -->
   	<th>Rank</th>
   	<th>Album Title</th>
   	<th>Year</th>
   </tr>
-      <% @rankedAlbums.each do |album| %>
-  <tr>
-   	<td><%= "#{album.rank}" %></td>
+      <% @rankedAlbums.each do |album| %> <!-- reckless indentation? -->
+  <tr><!-- reckless indentation? -->
+   	<td><%= "#{album.rank}" %></td> <!-- interpolating a string with a whole string is redundant. -->
    	<td><%= "#{album.albumName}" %></td>
     <td><%= "#{album.year}" %></td>
    	<% end %>
