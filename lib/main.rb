@@ -25,7 +25,7 @@ class AlbumRank
   end
 
 
-  def print_data # Interesting. So I have to instantiate an AlbumRank object in order to call this?
+  def self.print_data
     rankArray.each do |item|
     	puts item.inspect
     end
