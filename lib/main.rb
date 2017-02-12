@@ -35,40 +35,47 @@ end
 
 class AlbumRankApp
 
+  def initialize
+    @albums = []
+  end
+
   def call(env)
     request = Rack::Request.new(env)
 
-    albums = [] # Note that every request will hit the filesystem and load the data from disk. (Hint: constructor)
-
     File.open("top_100_albums.txt", "r") do |file|
-      albums = file.readlines
+      @albums = file.readlines
     end
 
-    @rankedAlbums = AlbumRank.build_array(albums)
+    @rankedAlbums = AlbumRank.build_array(@albums)
     # This is our front controller!
     case request.path
     when "/" then
-      Rack::Response.new(render("index.html.erb", @rankedAlbums)) # You must like repeated code, repeated code, repeated code.
+      response("index.html.erb", @rankedAlbums)
 
     when "/orderByAlbumNameLength" then
-      @rankedAlbums.sort! { |a,b| a.name.length <=> b.name.length } # See sort_by. And there's another trick using &...
-      Rack::Response.new(render("index.html.erb", @rankedAlbums)) # You must like repeated code, repeated code, repeated code.
+      @rankedAlbums.sort_by! { |a| a.name.length } 
+      response("index.html.erb", @rankedAlbums)
 
     when "/orderByYear" then
-      @rankedAlbums.sort! { |a,b| a.year <=> b.year } # See sort_by. And there's another trick using &...
-      Rack::Response.new(render("index.html.erb", @rankedAlbums)) # ... :)
+      @rankedAlbums.sort_by!(&:year)
+      response("index.html.erb", @rankedAlbums)
 
     when "/orderAlphabetically" then
-      @rankedAlbums.sort! { |a,b| a.name <=> b.name } # See sort_by. And there's another trick using &...
-      Rack::Response.new(render("index.html.erb", @rankedAlbums))
+      @rankedAlbums.sort_by!(&:name)
+      response("index.html.erb", @rankedAlbums)
 
     else Rack::Response.new("404 Not Found", 404)
     end
+  end
+
+  def response(file, array)
+    Rack::Response.new(render("#{file}", array))
   end
 
   def render(template, data)
     path = File.expand_path("../views/#{template}", __FILE__)
     output = ERB.new(File.read(path))
     output.result(binding)
-  end # One blank line after this.
+  end
+
 end
