@@ -4,7 +4,7 @@ require './lib/main.rb'
 require 'rack/test'
 require 'test/unit'
 
-class AlbumsAppTest < Test::Unit::TestCase
+class AlbumClassTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
@@ -16,11 +16,11 @@ class AlbumsAppTest < Test::Unit::TestCase
   	name = "Title"
   	year = "2017"
 
-  	@test = Album.new(rank, name, year)
+  	test = Album.new(rank, name, year)
 
-  	assert_equal("Title", @test.name)
-  	assert_equal("1", @test.rank)
-  	assert_equal("2017", @test.year)
+  	assert_equal("Title", test.name)
+  	assert_equal("1", test.rank)
+  	assert_equal("2017", test.year)
   end
   
  end

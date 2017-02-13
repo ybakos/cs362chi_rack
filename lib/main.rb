@@ -13,7 +13,6 @@ class Album
 
 end
 
-
 class AlbumRank
 
   def self.build_array(array) 
@@ -24,14 +23,13 @@ class AlbumRank
     return rankArray
   end
 
-
   def self.print_data
     rankArray.each do |item|
     	puts item.inspect
     end
   end
+  
 end
-
 
 class AlbumRankApp
 
