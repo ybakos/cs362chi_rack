@@ -29,11 +29,4 @@ class AlbumsAppTest < Test::Unit::TestCase
     assert_equal 404, last_response.status
   end
 
-  def test_sort_by_year
- 
-    get '/orderByYear'
-    assert last_response.ok?
-    assert_equal("Kind of Blue", @rankedAlbums.at(0).name)
-  end
-
 end

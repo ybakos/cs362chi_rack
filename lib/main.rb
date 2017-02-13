@@ -35,15 +35,16 @@ class AlbumRankApp
 
   def initialize
     @albums = []
-  end
-
-  def call(env)
-    request = Rack::Request.new(env)
 
     File.open(File.dirname(__FILE__) + '/top_100_albums.txt', 'r') do |file|
       @albums = file.readlines
     end
 
+  end
+
+  def call(env)
+    
+    request = Rack::Request.new(env)
     @rankedAlbums = AlbumRank.build_array(@albums)
     # This is our front controller!
     case request.path

@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 
 require_relative '../main.rb'
+require 'rack'
 require 'rack/test'
 require 'test/unit'
 
@@ -10,13 +11,13 @@ class SortingTest < Test::Unit::TestCase
   def app
 
     AlbumRankApp.new
-    @albums = []
+    #@albums = []
 
-    File.open(File.dirname(__FILE__) + '/test_albums.txt', 'r') do |file|
-      @albums = file.readlines
-    end
+    #File.open(File.dirname(__FILE__) + '/test_albums.txt', 'r') do |file|
+    #  @albums = file.readlines
+    #end
 
-    @rankedAlbums = AlbumRank.build_array(@albums)
+    #@rankedAlbums = AlbumRank.build_array(@albums)
 
   end
 
@@ -24,28 +25,29 @@ class SortingTest < Test::Unit::TestCase
  
     get '/orderByYear'
     assert last_response.ok?
+    puts @rankedAlbums
     assert_equal("Kind of Blue", @rankedAlbums.at(0).name)
   end
 
-  def test_sort_alphabetically
+  # def test_sort_alphabetically
 
-    get '/orderAlphabetically'
-    assert last_response.ok?
-    assert_equal("'Live' at The Apollo", @rankedAlbums.at(0).name)
-  end
+  #   get '/orderAlphabetically'
+  #   assert last_response.ok?
+  #   assert_equal("'Live' at The Apollo", @rankedAlbums.at(0).name)
+  # end
 
-  def test_sort_by_album_title_length
+  # def test_sort_by_album_title_length
 
-    get '/orderByAlbumNameLength'
-    assert last_response.ok?
-    assert_equal("Ten", @rankedAlbums.at(0).name)
-  end
+  #   get '/orderByAlbumNameLength'
+  #   assert last_response.ok?
+  #   assert_equal("Ten", @rankedAlbums.at(0).name)
+  # end
 
-  def test_sort_by_rank
+  # def test_sort_by_rank
 
-    get '/'
-    assert last_response.ok?
-    assert_equal("Sgt. Pepper's Lonely Hearts Club Band", @rankedAlbums.at(0).name)
-  end
+  #   get '/'
+  #   assert last_response.ok?
+  #   assert_equal("Sgt. Pepper's Lonely Hearts Club Band", @rankedAlbums.at(0).name)
+  # end
 
  end
