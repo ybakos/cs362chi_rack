@@ -40,7 +40,7 @@ class AlbumRankApp
   def call(env)
     request = Rack::Request.new(env)
 
-    File.open("top_100_albums.txt", "r") do |file|
+    File.open(File.dirname(__FILE__) + '/top_100_albums.txt', 'r') do |file|
       @albums = file.readlines
     end
 
