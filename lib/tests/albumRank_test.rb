@@ -13,14 +13,12 @@ class AlbumsAppTest < Test::Unit::TestCase
  
   def test_albumRank_build_array
     albums = []
-
     File.open(File.dirname(__FILE__) + '/test_albums.txt', 'r') do |file|
       albums = file.readlines
     end
-     
     @rankedAlbums = AlbumRank.build_array(albums)
     assert_equal 10, @rankedAlbums.length
-    
+
     #Test format is correct for all
     @rankedAlbums.each do |item|
       assert(item.name.is_a?(String))
@@ -39,5 +37,6 @@ class AlbumsAppTest < Test::Unit::TestCase
     assert_equal(10, @rankedAlbums.at(9).rank)
 
     # test some more stuff
-  end 
+  end
+   
 end
