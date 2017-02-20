@@ -22,5 +22,9 @@ class AlbumClassTest < Test::Unit::TestCase
   	assert_equal("1", test.rank)
   	assert_equal("2017", test.year)
   end
+
+  def test_album_responds_to_title
+    assert_respond_to(@album, :name, "Album does not have a title")
+  end
   
  end
