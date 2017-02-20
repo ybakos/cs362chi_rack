@@ -1,54 +1,52 @@
 <html>
-  <head>
-    <title>Top 100 Best Albums of All Time</title>
-    <style>
-      tr:nth-child(even) {
-       background-color: lightgrey;
-      }
+<head>
+  <title>Top 100 Best Albums of All Time</title>
+  <style>
+    tr:nth-child(even) {
+     background-color: lightgrey;
+    }
 
-      html {
-          display: table;
-          margin: auto;
-      }
+    html {
+        display: table;
+        margin: auto;
+    }
 
-      body {
-          display: table-cell;
-          vertical-align: middle;
-      }
+    body {
+        display: table-cell;
+        vertical-align: middle;
+    }
 
-      table, th, td{
-        border-collapse: collapse;
-      }
+    table, th, td{
+      border-collapse: collapse;
+    }
 
-      th{
-        font-size: 20px;
-      }
-    </style>
-  </head>
-  <body>
-  	<h1>Top 100 Best Albums of All Time</h1><br>
-
-    <select onchange="location = this.value;">
-      <option>Sort By</option>
-      <option value="/orderAlphabetically">Sort Alphabetically</option>
-      <option value="/orderByAlbumNameLength">Sort By Album Title Length</option>
-      <option value="/">Sort By Rank</option>
-      <option value="/orderByYear">Sort By Year</option>
-    </select>
-
-    <table>
+    th{
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+	<h1>Top 100 Best Albums of All Time</h1><br>
+  <select onchange="location = this.value;">
+    <option>Sort By</option>
+    <option value="/orderAlphabetically">Sort Alphabetically</option>
+    <option value="/orderByAlbumNameLength">Sort By Album Title Length</option>
+    <option value="/">Sort By Rank</option>
+    <option value="/orderByYear">Sort By Year</option>
+  </select>
+  <table>
+    <tr>
+    	<th>Rank</th>
+    	<th>Album Title</th>
+    	<th>Year</th>
+    </tr>       
+    <% @rankedAlbums.each do |album| %>
       <tr>
-      	<th>Rank</th>
-      	<th>Album Title</th>
-      	<th>Year</th>
-      </tr>       
-      <% @rankedAlbums.each do |album| %>
-        <tr>
-          <td><%= album.rank %></td>
-          <td><%= album.name %></td> 
-          <td><%= album.year %></td>
-        </tr>
-      <% end %>
-    </table>
-  </body>
+        <td><%= album.rank %></td>
+        <td><%= album.name %></td> 
+        <td><%= album.year %></td>
+      </tr>
+    <% end %>
+  </table>
+</body>
 </html>

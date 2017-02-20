@@ -2,7 +2,6 @@ require 'rack'
 require 'erb'
 
 class Album
-
   attr_accessor :rank, :name, :year 
 
   def initialize(rank, name, year)
@@ -35,34 +34,27 @@ class AlbumRankApp
 
   def initialize
     @albums = []
-
     File.open(File.dirname(__FILE__) + '/top_100_albums.txt', 'r') do |file|
       @albums = file.readlines
     end
-
   end
 
   def call(env)
-    
     request = Rack::Request.new(env)
     @rankedAlbums = AlbumRank.build_array(@albums)
     # This is our front controller!
     case request.path
     when "/" then
       response("index.html.erb", @rankedAlbums)
-
     when "/orderByAlbumNameLength" then
       @rankedAlbums.sort_by! { |a| a.name.length } 
       response("index.html.erb", @rankedAlbums)
-
     when "/orderByYear" then
       @rankedAlbums.sort_by!(&:year)
       response("index.html.erb", @rankedAlbums)
-
     when "/orderAlphabetically" then
       @rankedAlbums.sort_by!(&:name)
       response("index.html.erb", @rankedAlbums)
-
     else Rack::Response.new("404 Not Found", 404)
     end
   end
