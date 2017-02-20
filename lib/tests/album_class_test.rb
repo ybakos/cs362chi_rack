@@ -5,9 +5,9 @@ require 'test/unit'
 
 class AlbumClassTest < Test::Unit::TestCase
 
-  RANK = "1"
+  RANK = 1
   NAME = "Title"
-  YEAR = "2017"
+  YEAR = 2017
 
   def setup
     @album = Album.new(RANK, NAME, YEAR)
@@ -33,6 +33,10 @@ class AlbumClassTest < Test::Unit::TestCase
 
   def test_album_rank_must_be_greater_than_zero
     assert_raises(ArgumentError) {Album.new(0,NAME, YEAR)}
+  end
+
+  def test_album_title_can_not_be_empty_string
+    assert_raises(ArgumentError) {Album.new(RANK,"", YEAR)}
   end
   
  end
