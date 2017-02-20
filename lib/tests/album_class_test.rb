@@ -39,8 +39,5 @@ class AlbumClassTest < Test::Unit::TestCase
     assert_raises(ArgumentError) {Album.new(RANK,"", YEAR)}
   end
 
-  def test_album_year_cannot_be_greater_than_current_year
-    assert_raises(ArgumentError) { Album.new(RANK, NAME, (DateTime.now.year + 1)) }
-  end
   
  end
