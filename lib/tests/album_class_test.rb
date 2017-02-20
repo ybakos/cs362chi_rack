@@ -26,5 +26,13 @@ class AlbumClassTest < Test::Unit::TestCase
   def test_album_responds_to_title
     assert_respond_to(@album, :name, "Album does not have a title")
   end
+
+  def test_album_responds_to_rank
+    assert_respond_to(@album, :rank, "Album does not have a title")
+  end
+
+  def test_album_responds_to_year
+    assert_respond_to(@album, :year, "Album does not have a title")
+  end
   
  end
