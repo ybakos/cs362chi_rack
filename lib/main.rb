@@ -5,6 +5,7 @@ class Album
   attr_accessor :rank, :name, :year 
 
   def initialize(rank, name, year)
+    raise ArgumentError unless rank > 0
     @rank = rank
     @name = name
     @year = year

@@ -14,7 +14,7 @@ class AlbumClassTest < Test::Unit::TestCase
   end
 
   def test_album_class_initializer
-  	assert_equal(TITLE, @album.name)
+  	assert_equal(NAME, @album.name)
   	assert_equal(RANK, @album.rank)
   	assert_equal(YEAR, @album.year)
   end
