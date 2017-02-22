@@ -55,6 +55,8 @@ class AlbumRankApp
     when "/orderAlphabetically" then
       @rankedAlbums.sort_by!(&:name)
       response("index.html.erb", @rankedAlbums)
+    when "/data" then
+      Rack::Response.new(@albums, 200)
     else Rack::Response.new("404 Not Found", 404)
     end
   end
